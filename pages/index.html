@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style/style.css">
+    <link type="image/x-icon" href="images/favicon.ico" rel="shortcut icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link type="Image/x-icon" href="images/favicon.ico" rel="icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>OTK</title>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-logo">
+                <h1>OTK</h1>                    
+            </div>
+
+            <div class="dropdown">
+
+                <button class="dropbtn" onclick="toggleMenu()">Каталог</button>
+                <div class="dropdown-content">
+                    <ul>
+                        <li><a href="#1">Упаковка для суши</a></li>
+                        <li><a href="#2">Упаковка для тортов</a></li>
+                        <li><a href="#2">ланч-боксы</a></li>
+                        <li><a href="#2">Другие упаковки</a></li>
+                    </ul>
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Поиск">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+            <div class="user">
+
+                <div class="profile" id="profile" onclick="ToProfile()">
+                    <div class="image">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z"/></svg>
+                    </div>
+                    <p class="profile-text" id="profile-text"></p>
+                </div>
+                <div class="order" onclick="ToOrder()">
+                    <div class="image" id="order">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M164-160v-517L82-853l56-27 90 203h505l90-203 56 27-82 176v517H164Zm232-297h170q12.75 0 21.38-8.68 8.62-8.67 8.62-21.5 0-12.82-8.62-21.32-8.63-8.5-21.38-8.5H396q-12.75 0-21.37 8.68-8.63 8.67-8.63 21.5 0 12.82 8.63 21.32 8.62 8.5 21.37 8.5ZM224-220h513v-397H224v397Zm0 0v-397 397Z"/></svg>
+                    </div>
+                    <p>Заказы</p>
+                </div>
+                <div class="favourite" onclick="ToFavourite()">
+                    <div class="image">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z"/></svg>
+                    </div>
+                    <p>Избранное</p>
+                </div>
+                <div class="cart" onclick="ToCart()">
+                    <div class="image">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg>
+                    </div>
+                    <p>Корзина</p>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <section class="main-block">
+        
+    </section>
+    
+    <div class="container">
+        <div class="data-container" id="data-container"></div>
+    </div>
+
+    <div id="authorizationDialog" class="dialog-overlay" style="display: none">
+        <div class="dialog-box">
+
+            <div class="modal__window">
+                <div class="auth-module-close" >
+                    <svg fill="currentColor" viewBox="0 0 32 32" onclick="hideAuthorizationDialog()">
+                        <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0L16 14.586 28.293 2.293a1 1 0 111.414 1.414L17.414 16l12.293 12.293a1 1 0 01-1.414 1.414L16 17.414 3.707 29.707a1 1 0 01-1.414-1.414L14.586 16 2.293 3.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <form class="auth-form" name="form-auth" method="post">
+                    
+                    <label class="auth-form__label">
+                        <span class="auth-form__placeholder">Логин</span>
+                        <input class="auth-form__input input-login" name="login" autocomplete="off" required>
+                    </label>
+                    
+                    <label class="auth-form__label">
+                        <span class="auth-form__placeholder">Пароль</span>
+                        <input class="auth-form__input input-password" type="password" name="password" autocomlete="off" required>
+                        <div class="auth-form__toggler">
+                            <i class="la la-eye auth-form__icon"></i>
+                            <input type="checkbox" class="auth-form__checkbox password-toggler">
+                        </div>
+                    </label>
+                    
+                    <div class="auth-form__answer"></div>
+                    
+                    <input class="auth-form__submit" type="submit" value="Войти">
+                    
+                    <div class="auth-form__bottom">
+                        <span>Нет аккаунта?</span>
+                        <a onclick="showRegistrationDialog()">Создайте новый.</a>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+    <div id="registrationDialog" class="dialog-overlay" style="display: none">
+        <div class="dialog-box">
+            <div class="modal__window">
+
+                <div class="auth-module-close" >
+                    <svg fill="currentColor" viewBox="0 0 32 32" onclick="hideRegistrationDialog()">
+                        <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0L16 14.586 28.293 2.293a1 1 0 111.414 1.414L17.414 16l12.293 12.293a1 1 0 01-1.414 1.414L16 17.414 3.707 29.707a1 1 0 01-1.414-1.414L14.586 16 2.293 3.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <form class="registration-form" name="form-auth" method="post">
+                    <div class="data">
+                        <div class="data-user">
+                            <label class="auth-form__label">
+                                <span class="auth-form__placeholder">Имя</span>
+                                <input class="auth-form__input input-name" name="name" autocomplete="off" required>
+                            </label>
+                            
+                            <label class="auth-form__label">
+                                <span class="auth-form__placeholder">Фамилия</span>
+                                <input class="auth-form__input input-surname" name="surname" autocomlete="off" required>
+                            </label>
+                            <label class="auth-form__label">
+                                <span class="auth-form__placeholder">Отчество</span>
+                                <input class="auth-form__input input-surname" name="Patronymic" autocomlete="off" required>
+                            </label>
+                        </div>
+                        <div class="auth-data">
+                            <label class="auth-form__label">
+                                <span class="auth-form__placeholder">Логин</span>
+                                <input class="auth-form__input input-login" name="login" autocomlete="off" required>
+                            </label>
+                            <label class="auth-form__label">
+                                <span class="auth-form__placeholder">Пароль</span>
+                                <input class="auth-form__input input-password" type="password" name="password" autocomlete="off" required>
+                                <div class="auth-form__toggler">
+                                    <i class="la la-eye auth-form__icon"></i>
+                                    <input type="checkbox" class="auth-form__checkbox password-toggler">
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                        
+                        <div class="auth-form__answer"></div>
+                        
+                        <input class="auth-form__submit" type="submit" value="Зарегистрироваться">
+                        
+                    <div class="auth-form__bottom">
+                        <span>Есть аккаунт?</span>
+                        <a onclick="showAuthorizationDialog()">Войти</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/static/script/burger_menu.js"></script>
+    <script src="static/script/authorization.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/static/script/index.js"></script>
+    <script src="/static/script/product.js"></script>
+    <script src="/static/script/header.js"></script>
+</body>
+
+</html>

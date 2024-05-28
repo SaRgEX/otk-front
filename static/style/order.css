@@ -1,0 +1,19 @@
+.container-order {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.container-order-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  background-color: #fff;
+}
+
+.container-order-item:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}/*# sourceMappingURL=order.css.map */
