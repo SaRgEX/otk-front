@@ -1,7 +1,7 @@
 const profile = document.getElementsByClassName('profile-container')[0];
 const address = document.getElementById('address');
 const recentOrder = document.getElementById('recent-order-wrapper');
-fetch('http://localhost:8080/api/profile/', {
+fetch('http://' + location.host + '/api/my/profile/', {
     headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
     },
@@ -30,11 +30,11 @@ fetch('http://localhost:8080/api/profile/', {
 function logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('name');
-    window.location.href = 'http://localhost/';
+    window.location.href = 'http://' + location.host;
 }
 
 function getAddress() {
-    fetch('http://localhost:8080/api/address/', {
+    fetch('http://' + location.host + '/api/my/address/', {
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
@@ -52,7 +52,7 @@ function getAddress() {
 }
 
 function addAdress() {
-    fetch('http://localhost:8080/api/address/', {
+    fetch('http://' + location.host + '/api/my/address/', {
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
@@ -66,7 +66,7 @@ function addAdress() {
 }
 
 function getRecentOrders() {
-    fetch('http://localhost:8080/api/order/', {
+    fetch('http://' + location.host + '/api/my/order/', {
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
@@ -97,5 +97,5 @@ function getRecentOrders() {
         }
         
 function viewPurchase(id) {
-    window.location = 'http://localhost/api/order/' + id
+    window.location = 'http://' + location.host + '/api/order/' + id
 }

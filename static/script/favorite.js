@@ -1,10 +1,10 @@
 const favorite = document.getElementById('container-favorite')
 
-fetch('http://localhost:8080/api/favorite/', {
+fetch('http://' + location.host + '/api/my/favorite/', {
     method: "GET",
     headers: {
         'Content-Type': 'application/json',
-        'Origin': 'http://localhost:8080',
+        'Origin': 'http://localhost:3000',
         'Authorization': `Bearer ${localStorage.getItem('token')}`
     },
 })
@@ -45,11 +45,11 @@ function deleteFromFavorite(article) {
     data = {
         "product_article": article
     }
-    fetch('http://localhost:8080/api/favorite/', {
+    fetch('http://' + location.host + '/api/my/favorite/', {
         method: "DELETE",
         headers: {
             'Content-Type': 'application/json',
-            'Origin': 'http://localhost:8080',
+            'Origin': 'http://localhost:3000',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify(data)

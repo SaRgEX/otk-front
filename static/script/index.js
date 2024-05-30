@@ -1,4 +1,4 @@
-fetch('http://localhost:8080/products/')
+fetch('http://' + location.host + '/api/products/')
 .then(response => response.json())
 .then(data => {
   const container = document.getElementById('data-container');

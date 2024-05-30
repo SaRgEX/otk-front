@@ -2,7 +2,7 @@ authorizationDialog = document.getElementById("authorizationDialog");
 registrationDialog = document.getElementById("registrationDialog");
 
 function isAuthorized() {
-    fetch('http://localhost:8080/api/profile/', {
+    fetch('http://' + location.host + '/api/my/profile/', {
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -32,12 +32,11 @@ function performAuthorization(login, password) {
         "login": login,
         "password": password
     };
-
-    fetch('http://localhost:8080/auth/sign-in', {
+    console.log(location.host);
+    fetch('http://' + location.host + '/api/auth/sign-in', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json', // тип содержимого
-            'Origin': 'http://localhost:8080' // разрешенный источник
         },
         body: JSON.stringify(data)
     })
@@ -86,7 +85,7 @@ function validate(login, password) {
 }
 
 function profile() {
-    window.location.href = '/api/profile';
+    window.location.href = '/my/profile';
 }
 
 function performRegistration() {
@@ -103,11 +102,11 @@ function performRegistration() {
         password: password.value
     };
 
-    fetch('http://localhost:8080/auth/sign-up', {
+    fetch('http://' + location.host + '/api/auth/sign-up', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Origin': 'http://localhost:8080'
+            'Origin': 'http://localhost:3000/'
         },
         body: JSON.stringify(data)
     })

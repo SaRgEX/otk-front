@@ -11,7 +11,7 @@ function getName() {
 
 function ToOrder() {
     if (isAuthorize()) {
-        window.location.href = 'http://localhost/api/order';
+        window.location.href = 'http://localhost/my/order';
     }
 }
 
@@ -21,7 +21,7 @@ function ToHome() {
 
 function ToProfile() {
     if (isAuthorize()) {
-        window.location.href = 'http://localhost/api/profile';
+        window.location.href = 'http://localhost/my/profile';
     } else {
         showAuthorizationDialog();
     }
@@ -29,13 +29,13 @@ function ToProfile() {
 
 function ToFavourite() {
     if (isAuthorize()) {
-        window.location.href = 'http://localhost/api/favourite';
+        window.location.href = 'http://localhost/my/favorite';
     }
 }
 
 function ToCart() {
     if (isAuthorize()) {
-        window.location.href = 'http://localhost/api/cart';
+        window.location.href = 'http://localhost/my/cart';
     }
 }
 

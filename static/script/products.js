@@ -3,11 +3,11 @@ document.title = id;
 const container = document.getElementsByClassName('container')[0]
 const product = document.getElementsByClassName('product')[0]
 const productName = document.getElementById('product-name')
-fetch('http://localhost:8080/products/' + id + "/", {
+fetch('http://' + location.host + '/api/products/' + id + "/", {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
-        'Origin': 'http://localhost:8080',
+        'Origin': 'http://localhost:3000',
     },
 })
 .then(response => response.json())
@@ -43,12 +43,12 @@ function addToCart() {
         amount: Number(amount)
     }
 
-    fetch('http://localhost:8080/api/cart/', {
+    fetch('http://' + location.host + '/api/my/cart/', {
         method: 'POST',
         body: JSON.stringify(order),
         headers: {
             'Content-Type': 'application/json',
-            'Origin': 'http://localhost:8080',
+            'Origin': 'http://localhost:3000',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
 
@@ -66,11 +66,11 @@ function addToCart() {
 }
 
 function addToFavorite() {
-    fetch('http://localhost:8080/api/favorite/', {
+    fetch('http://' + location.host + '/api/my/favorite/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Origin': 'http://localhost:8080',
+            'Origin': 'http://localhost:3000',
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify({product_article: Number(localStorage.getItem('id'))})

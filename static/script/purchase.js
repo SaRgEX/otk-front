@@ -2,11 +2,11 @@ let id = window.location.pathname.split('/')[3];
 console.log(id)
 const container = document.getElementsByClassName('container')[0];
 
-fetch('http://localhost:8080/api/order/' + id + "/", {
+fetch('http://' + location.host + '/api/order/' + id + "/", {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
-        'Origin': 'http://localhost:8080',
+        'Origin': 'http://localhost:3000',
         'Authorization': `Bearer ${localStorage.getItem('token')}`
     },
 })

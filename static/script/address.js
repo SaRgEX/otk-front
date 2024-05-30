@@ -1,5 +1,5 @@
 function getAddress() {
-    fetch('http://localhost:8080/api/address/', {
+    fetch('http://'+ location.host + '/api/address/', {
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
         },

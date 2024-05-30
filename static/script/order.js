@@ -1,8 +1,8 @@
-fetch('http://localhost:8080/api/order/', {
+fetch('http://' + location.host + '/api/my/order/', {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json', // тип содержимого
-        'Origin': 'http://localhost:8080', // разрешенный источник
+        'Origin': 'http://localhost:3000', // разрешенный источник
         'Authorization': `Bearer ${localStorage.getItem('token')}`
     },
 })
@@ -44,5 +44,5 @@ function createHTMLFromData(data) {
 }
 
 function viewPurchase(id) {
-    window.location.href = `http://localhost/api/order/${id}`;
+    window.location.href = `http://' + location.host + '/api/my/order/${id}`;
 }

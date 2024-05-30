@@ -1,6 +1,6 @@
 function ToProduct(id) {
   localStorage.setItem('id', id);
-  window.location.href = 'http://localhost/products/' + id; 
+  window.location.href = 'http://' + location.host + '/products/' + id; 
 }
 
 function loadProduct() {
