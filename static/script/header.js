@@ -11,17 +11,17 @@ function getName() {
 
 function ToOrder() {
     if (isAuthorize()) {
-        window.location.href = 'http://localhost/my/order';
+        window.location.href = 'http://' + location.host + '/my/order';
     }
 }
 
 function ToHome() {
-    window.location.href = 'http://localhost/';
+    window.location.href = 'http://' + location.host + '/';
 }
 
 function ToProfile() {
     if (isAuthorize()) {
-        window.location.href = 'http://localhost/my/profile';
+        window.location.href = 'http://' + location.host + '/my/profile';
     } else {
         showAuthorizationDialog();
     }
@@ -29,13 +29,13 @@ function ToProfile() {
 
 function ToFavourite() {
     if (isAuthorize()) {
-        window.location.href = 'http://localhost/my/favorite';
+        window.location.href = 'http://' + location.host + '/my/favorite';
     }
 }
 
 function ToCart() {
     if (isAuthorize()) {
-        window.location.href = 'http://localhost/my/cart';
+        window.location.href = 'http://' + location.host + '/my/cart';
     }
 }
 
