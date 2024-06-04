@@ -18,6 +18,29 @@
   cursor: pointer;
 }
 
+.address-map {
+  width: 450px;
+  height: 450px;
+}
+
+[class*=copyraights-panel] {
+  display: none !important;
+}
+
+.address-map > ymaps {
+  border-radius: 0 20px 20px 0;
+  overflow: hidden;
+}
+
+.dialog-box {
+  background: none;
+  border: none;
+}
+
+.auth-form__submit {
+  border-radius: 50px;
+}
+
 .profile-info {
   display: flex;
   flex-direction: column;
@@ -77,4 +100,29 @@
 
 .order-container:hover {
   background-color: #bdbdbd;
+}
+
+.data {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px 0;
+  border-radius: 20px;
+  background-color: #ffffff;
+}
+
+.data-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 10px 0;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.auth-form__placeholder {
+  top: -12px;
+  font-size: 12px;
 }/*# sourceMappingURL=profile.css.map */

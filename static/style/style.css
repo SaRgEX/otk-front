@@ -461,6 +461,8 @@ input {
 }
 .product-data img {
   mix-blend-mode: multiply;
+  padding: 5px 10px;
+  border-radius: 32px;
 }
 
 .product-data:hover {

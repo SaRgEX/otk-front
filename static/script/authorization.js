@@ -32,7 +32,6 @@ function performAuthorization(login, password) {
         "login": login,
         "password": password
     };
-    console.log(location.host);
     fetch('http://' + location.host + '/api/auth/sign-in', {
         method: 'POST',
         headers: {
@@ -88,18 +87,13 @@ function profile() {
     window.location.href = '/my/profile';
 }
 
-function performRegistration() {
-    let first_name = document.getElementById('name');
-    let last_name = document.getElementById('surname');
-    let patronymic = document.getElementById('patronymic');
-    let login = document.getElementById('reg-login');
-    let password = document.getElementById('reg-password');
+function performRegistration(fName, lName, patronumic, login, password) {
     let data = {
-        first_name: first_name.value,
-        last_name: last_name.value,
-        patronymic: patronymic.value,
-        login: login.value,
-        password: password.value
+        first_name: fName,
+        last_name: lName,
+        patronymic: patronumic,
+        login: login,
+        password: password
     };
 
     fetch('http://' + location.host + '/api/auth/sign-up', {
@@ -115,7 +109,7 @@ function performRegistration() {
                 return;
             } else {
                 hideRegistrationDialog();
-                profile();
+                alert("Регистрация прошла успешно")
                 return response.json();
             }
         })
@@ -130,7 +124,74 @@ function performRegistration() {
         });
 }
 
-window.onload = function() {
+window.onload = formsAuthorization();
+
+function formsAuthorization() {
+    signIn()
+    signUp()
+}
+
+function signUp() {
+    (function() {
+        const inputText = document.querySelectorAll('.auth-form__input');
+
+        inputText.forEach( function(input) {
+            input.addEventListener('focus', function() {
+                this.classList.add('focus');
+                this.parentElement.querySelector('.auth-form__placeholder').classList.add('focus');
+            });
+            input.addEventListener('blur', function() {
+                this.classList.remove('focus');
+                if (! this.value) {
+                    this.parentElement.querySelector('.auth-form__placeholder').classList.remove('focus');
+                }
+            });
+        });
+    })();
+
+    (function() {
+        const togglers = document.querySelectorAll('.password-toggler');
+
+        togglers.forEach( function(checkbox) {
+            checkbox.addEventListener('change', function() {
+
+                const toggler = this.parentElement,
+                      input   = toggler.parentElement.querySelector('.input-password'),
+                      icon    = toggler.querySelector('.auth-form__icon');
+
+                if (checkbox.checked) {
+                    input.type = 'text';
+                    icon.classList.remove('la-eye')
+                    icon.classList.add('la-eye-slash');
+                }
+
+                else
+                {
+                    input.type = 'password';
+                    icon.classList.remove('la-eye-slash')
+                    icon.classList.add('la-eye');
+                }
+            });
+        });
+    })();
+
+    (function() {
+            document.forms['form-registration'].addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const answerContainer = this.querySelector('.auth-form__answer'),
+                  first_name = this.elements.first_name.value,
+                  last_name = this.elements.surname.value,
+                  patronumic = this.elements.patronymic.value,
+                  login = this.elements.login.value,
+                  password = this.elements.password.value;
+
+            performRegistration(first_name, last_name, patronumic, login, password);
+        });
+    })();
+}
+
+function signIn() {
     (function() {
         const inputText = document.querySelectorAll('.auth-form__input');
 
@@ -185,7 +246,7 @@ window.onload = function() {
             performAuthorization(login, password);
         });
     })();
-};
+}
 
 function showAuthorizationDialog() {
     hideRegistrationDialog();

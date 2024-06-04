@@ -44,5 +44,5 @@ function createHTMLFromData(data) {
 }
 
 function viewPurchase(id) {
-    window.location.href = `http://' + location.host + '/api/my/order/${id}`;
+    window.location.href = 'http://' + location.host + '/my/order/' + id;
 }

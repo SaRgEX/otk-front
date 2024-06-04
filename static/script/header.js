@@ -22,8 +22,6 @@ function ToHome() {
 function ToProfile() {
     if (isAuthorize()) {
         window.location.href = 'http://' + location.host + '/my/profile';
-    } else {
-        showAuthorizationDialog();
     }
 }
 
@@ -43,6 +41,7 @@ function isAuthorize() {
     if (localStorage.getItem('token')) {
         return true;
     } else {
+        showAuthorizationDialog();
         return false;
     }
 }

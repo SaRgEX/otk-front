@@ -1,8 +1,13 @@
+import {Notification} from '/static/script/notification.js'
 let id = localStorage.getItem('id')
 document.title = id;
 const container = document.getElementsByClassName('container')[0]
 const product = document.getElementsByClassName('product')[0]
 const productName = document.getElementById('product-name')
+const addCartButton = document.getElementById('addToCart')
+addCartButton.addEventListener('click', addToCart)
+const addFavotiteButton = document.getElementById('favorite')
+addFavotiteButton.addEventListener('click', addToFavorite)
 fetch('http://' + location.host + '/api/products/' + id + "/", {
     method: 'GET',
     headers: {
@@ -55,13 +60,18 @@ function addToCart() {
     }).then(response => {
         response.text().then(text => {
             let json = JSON.parse(text);
-            if (json.status == 200) {
-                alert('Заказ оформлен');
+            if (response.status !== 200) {
+                let notification = new Notification();
+                notification.ErrorMessage('Заказ не оформлен');
+            } 
+            else {
+                let notification = new Notification();
+                notification.SuccessMessage('Заказ оформлен');
             }
         })
     }).catch(error => {
-        console.error('Error:', error);
-        alert('Заказ не оформлен');
+        let notification = new Notification();
+        notification.ErrorMessage('Заказ не оформлен');
     })
 }
 
@@ -77,12 +87,16 @@ function addToFavorite() {
     }).then(response => {
         response.text().then(text => {
             let json = JSON.parse(text);
-            if (json.status === 200) {
-                alert('Товар добавлен в избранное');
+            if (response.status === 200) {
+                let notification = new Notification();
+                notification.SuccessMessage('Товар добавлен в избранное');
+            } else {
+                let notification = new Notification();
+                notification.ErrorMessage('Товар не добавлен в избранное');
             }
         })
     }).catch(error => {
-        console.error('Error:', error);
-        alert('Товар не добавлен в избранное');
+        let notification = new Notification();
+        notification.ErrorMessage('Товар не добавлен в избранное');
     })
 }

@@ -1,6 +1,7 @@
 const profile = document.getElementsByClassName('profile-container')[0];
 const address = document.getElementById('address');
 const recentOrder = document.getElementById('recent-order-wrapper');
+const addressWindow = document.getElementById('address-dialog')
 fetch('http://' + location.host + '/api/my/profile/', {
     headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -45,7 +46,7 @@ function getAddress() {
             let addressSelector = document.querySelector('#address-selector');
             for (let i = 0; i < data.address.length; i++) {
                 let option = document.createElement('option');
-                option.textContent = option.value = "ул. " + data.address[i].street + ", дом " + data.address[i].house
+                option.textContent = option.value = data.address[i].city + ", " + data.address[i].street + ", " + data.address[i].house + ", офис " + data.address[i].apartment
                 addressSelector.append(option)
             }
         })
@@ -60,9 +61,7 @@ function addAdress() {
         body: address.value
     })
         .then(response => response.json())
-        .then(data => {
-            console.log(data)
-        })
+        .then(data => {})
 }
 
 function getRecentOrders() {
@@ -74,12 +73,11 @@ function getRecentOrders() {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             if (data === null) {
                 recentOrder.innerHTML = "Нет заказов"
             }
             else {   
-                for (let i = data.length - 1; i > data.length - 5; i--) {
+                for (let i = data.length - 1; (i > data.length - 5) && (i >= 0); i--) {
                     let orderContainer = document.createElement('div');
                     orderContainer.className = 'order-container';
                     let orderDate = document.createElement('p');
@@ -95,7 +93,78 @@ function getRecentOrders() {
             }
             })
         }
-        
+
+function showAddress() {
+    addressWindow.style = 'display: flex';
+}
+
+function hideAddressDialog() {
+    addressWindow.style = 'display: none';
+}
+
 function viewPurchase(id) {
-    window.location = 'http://' + location.host + '/api/order/' + id
+    window.location = 'http://' + location.host + '/my/order/' + id
+}
+
+window.onload = addressForm();
+
+function addressForm() {
+    (function() {
+        const inputText = document.querySelectorAll('.auth-form__input');
+        inputText.forEach( function(input) {
+            input.addEventListener('focus', function() {
+                this.classList.add('focus');
+                this.parentElement.querySelector('.auth-form__placeholder').classList.add('focus');
+            });
+            input.addEventListener('blur', function() {
+                this.classList.remove('focus');
+                if (! this.value) {
+                    this.parentElement.querySelector('.auth-form__placeholder').classList.remove('focus');
+                }
+            });
+            input.addEventListener('change', function() {
+                this.classList.add('focus');
+                this.parentElement.querySelector('.auth-form__placeholder').classList.add('focus');
+            });
+        });
+    })();
+    (function() {
+        document.forms['form-address'].addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const answerContainer = this.querySelector('.auth-form__answer'),
+              city = this.elements.city.value,
+              street = this.elements.street.value,
+              house = this.elements.house.value,
+              apartment = this.elements.apartment.value;
+        addAddress(city, street, house, apartment);
+    });
+})();
+}
+
+function addAddress(city, street, house, apartment) {
+    data = {
+        city: city,
+        postal_code: 64000,
+        street: street,
+        house: house,
+        apartment: apartment
+    }
+    fetch('http://' + location.host + '/api/my/address/', {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        method: 'POST',
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            console.log(response.status)
+            if (response.status === 200) {
+                return response.json();
+            }
+            else {
+                return;
+            }
+        })
+        .then(data => {})
 }

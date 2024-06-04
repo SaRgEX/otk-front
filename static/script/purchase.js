@@ -2,7 +2,7 @@ let id = window.location.pathname.split('/')[3];
 console.log(id)
 const container = document.getElementsByClassName('container')[0];
 
-fetch('http://' + location.host + '/api/order/' + id + "/", {
+fetch('http://' + location.host + '/api/my/order/' + id + "/", {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
