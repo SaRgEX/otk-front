@@ -2,6 +2,11 @@ const profile = document.getElementsByClassName('profile-container')[0];
 const address = document.getElementById('address');
 const recentOrder = document.getElementById('recent-order-wrapper');
 const addressWindow = document.getElementById('address-dialog')
+const editWindow = document.getElementById('edit-dialog')
+const formInputs = document.getElementById('form_inputs')
+const profileContainer = document.createElement('div');
+profileContainer.className = 'profile-info';
+let userInfo = []
 fetch('http://' + location.host + '/api/my/profile/', {
     headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -10,19 +15,37 @@ fetch('http://' + location.host + '/api/my/profile/', {
 })
     .then(response => response.json())
     .then(data => {
+        userInfo.push(data.first_name)
+        userInfo.push(data.last_name)
+        userInfo.push(data.phone)
+        userInfo.push(data.email)
         localStorage.setItem('name', data.first_name);
-        const profileContainer = document.createElement('div');
-        profileContainer.className = 'profile-info';
         const profile_name = document.createElement('p');
         const profile_surname = document.createElement('p');
         const info = document.createElement('p');
+        const phone = document.createElement('p');
+        const email = document.createElement('p');
         profile_name.innerHTML = "Имя: " + data.first_name;
         document.getElementById('profile-text').textContent = data.first_name;
         profile_surname.innerHTML = "Фамилия: " + data.last_name;
         info.innerHTML = "Статус: " + data.status;
+        if (data.phone) {
+            phone.innerHTML = "Телефон: " + data.phone
+        } else {
+            const button = document.createElement('button');
+            button.onclick(() => editInfo("phone"))
+            phone.innerHTML = "Телефон: " + button
+        }
+        if (data.email) {
+            email.innerHTML = "Email: " + data.email
+        } else {
+            email.innerHTML = "Email: "
+        }
         profileContainer.appendChild(profile_name)
         profileContainer.appendChild(profile_surname)
         profileContainer.appendChild(info)
+        profileContainer.appendChild(phone)
+        profileContainer.appendChild(email)
         profile.appendChild(profileContainer)
         getAddress()
         getRecentOrders()
@@ -32,6 +55,21 @@ function logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('name');
     window.location.href = 'http://' + location.host;
+}
+
+function showEditProfile() {
+    editWindow.style.display = 'flex';
+    editInfo();
+}
+
+function hideEditDialog() {
+    editWindow.style.display = 'none';
+}
+
+function editInfo(type) {
+    for (i = 0; i < formInputs.children.length - 1; i++) {
+        formInputs.children[i].children[1].value = userInfo[i];
+    }
 }
 
 function getAddress() {

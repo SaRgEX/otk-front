@@ -49,10 +49,8 @@ function init() {
         mapStateAutoApply: true
     }).then(function (result) {
         let a = result.geoObjects.get(0).properties._data
-        console.log(a)
         addressInputs[0].value = a.text.split(',')[0]
         addr = a.name.split(',')
-        console.log(addr)
         addressInputs[1].value = addr[0]
         addressInputs[2].value = addr[1]
     });
