@@ -24,7 +24,13 @@ fetch('http://' + location.host + '/api/my/order/', {
 
 function createHTMLFromData(data) {
     const container = document.getElementsByClassName('container-order')[0];
-
+    if (data == null) {
+        const containerOrder = document.createElement('div');
+        containerOrder.className = "container-order-item";
+        containerOrder.innerHTML = "У вас нет заказов";
+        container.appendChild(containerOrder);
+        return
+    }
     data.forEach(item => {
         const containerOrder = document.createElement('div');
         containerOrder.className = "container-order-item";

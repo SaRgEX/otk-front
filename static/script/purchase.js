@@ -12,13 +12,37 @@ fetch('http://' + location.host + '/api/my/order/' + id + "/", {
 })
     .then(response => response.json())
     .then(data => {
+        console.log(data)
         let purchase = createHTMLFromData(data)
+
         container.innerHTML = purchase
+        products = document.getElementById('products');
+    
+        console.log(products)
+        for (let i = 0; i < data.purchase.length; i++) {
+            products.innerHTML += createHTMLFromProduct(data.purchase[i])
+        }
     })
 
 
-function createHTMLFromData(data) {
+function createHTMLFromProduct(data) {
+    let html = `
+    <div class="product-container">
+        <div class="product-image">
+            <img src="/${data.image}" alt="">
+        </div>
+        <div class="product-info">
+            <h2>${data.name}</h2>
+            <p>${data.description}</p>
+            <p>Цена за ед. ${data.price / 100} ₽</p>
+            <p>Количество: ${data.amount}</p>
+        </div>
+    </div>
+    `
+    return html
+}
 
+function createHTMLFromData(data) {
     let html = `
     <div class="purchase-container">
         <div class="purchase-info">
@@ -31,10 +55,11 @@ function createHTMLFromData(data) {
                 <h2>Статус</h2>
                 <p>${data.order.status}</p>
             </div>
-            <div class="purchase-price">
-                <h2>Стоимость</h2>
-                <p>${getPrice(data.purchase)} ₽</p>
+            <div class="purchase-products" id="products">
             </div>
+            </div>
+        <div class="purchase-price">
+            <p>Итого: ${getPrice(data.purchase)} ₽</p>
         </div>
     </div>
     `

@@ -16,6 +16,7 @@
   width: 100%;
   padding: 6px;
   cursor: pointer;
+  max-width: 250px;
 }
 
 .address-map {
@@ -125,4 +126,12 @@
 .auth-form__placeholder {
   top: -12px;
   font-size: 12px;
+}
+
+.phone-items {
+  display: flex;
+  flex-direction: row;
+}
+.phone-items button {
+  margin: 0;
 }/*# sourceMappingURL=profile.css.map */

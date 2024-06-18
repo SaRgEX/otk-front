@@ -16,6 +16,7 @@
   width: 100%;
   padding: 6px;
   cursor: pointer;
+  max-width: 250px;
 }
 
 .container h1 {

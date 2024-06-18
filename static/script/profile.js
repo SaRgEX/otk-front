@@ -5,6 +5,8 @@ const addressWindow = document.getElementById('address-dialog')
 const editWindow = document.getElementById('edit-dialog')
 const formInputs = document.getElementById('form_inputs')
 const profileContainer = document.createElement('div');
+const updateInfo = document.getElementById('updateInfo');
+updateInfo.onclick = () => putProfile();
 profileContainer.className = 'profile-info';
 let userInfo = []
 fetch('http://' + location.host + '/api/my/profile/', {
@@ -23,6 +25,7 @@ fetch('http://' + location.host + '/api/my/profile/', {
         const profile_name = document.createElement('p');
         const profile_surname = document.createElement('p');
         const info = document.createElement('p');
+        const phoneItems = document.createElement('div');
         const phone = document.createElement('p');
         const email = document.createElement('p');
         profile_name.innerHTML = "Имя: " + data.first_name;
@@ -32,9 +35,7 @@ fetch('http://' + location.host + '/api/my/profile/', {
         if (data.phone) {
             phone.innerHTML = "Телефон: " + data.phone
         } else {
-            const button = document.createElement('button');
-            button.onclick(() => editInfo("phone"))
-            phone.innerHTML = "Телефон: " + button
+            phone.innerHTML = "Телефон: "
         }
         if (data.email) {
             email.innerHTML = "Email: " + data.email
@@ -70,6 +71,63 @@ function editInfo(type) {
     for (i = 0; i < formInputs.children.length - 1; i++) {
         formInputs.children[i].children[1].value = userInfo[i];
     }
+}
+
+function dataFromInputs() {
+    for (i = 0; i < formInputs.children.length - 1; i++) {
+        userInfo[i] = formInputs.children[i].children[1].value;
+    }
+    data = {
+        'first_name': userInfo[0],
+        'last_name': userInfo[1],
+        'phone': userInfo[2],
+        'email': userInfo[3]
+    }
+    return data;
+}
+
+function putProfile() {
+    data = dataFromInputs();
+    fetch('http://' + location.host + '/api/my/profile/', {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        method: 'PUT',
+        body: JSON.stringify(data)
+    })
+        .then(response => response.json())
+        .then(data => {
+            editWindow.style.display = 'none';
+            location.href('http://' + location.host + '/my/profile');
+        })
+}
+
+function editForm() {
+    (function() {
+        const inputText = document.querySelectorAll('.auth-form__input');
+        inputText.forEach( function(input) {
+            input.addEventListener('focus', function() {
+                this.classList.add('focus');
+                this.parentElement.querySelector('.auth-form__placeholder').classList.add('focus');
+            });
+            input.addEventListener('blur', function() {
+                this.classList.remove('focus');
+                if (! this.value) {
+                    this.parentElement.querySelector('.auth-form__placeholder').classList.remove('focus');
+                }
+            });
+            input.addEventListener('change', function() {
+                this.classList.add('focus');
+                this.parentElement.querySelector('.auth-form__placeholder').classList.add('focus');
+            });
+        });
+    })();
+    (function() {
+        document.forms['form-address'].addEventListener('submit', function(e) {
+        e.preventDefault();
+        putProfile();
+    });
+})();
 }
 
 function getAddress() {
