@@ -29,6 +29,11 @@
   width: max-content;
 }
 
+.product-image img {
+  width: 180;
+  height: 180;
+}
+
 .product-container {
   display: flex;
   flex-direction: row;
